@@ -28,41 +28,6 @@ def read():
         Result += "文件內容：{}".format(doc.to_dict()) + "<br>"    
     return Result
 
-@app.route("/search", methods=["POST","GET"])
-def search():
-    if request.method == "POST":
-        McdonaldProduct = request.form["McdonaldProduct"]
-
-        info = ""     
-        collection_ref = db.collection("麥當勞")
-        #docs = collection_ref.where("title","==", "喜悅：達賴喇嘛遇見屠圖主教").get()
-        docs = collection_ref.order_by("kcal").get()
-        for doc in docs:
-            if McdonaldProduct in doc.to_dict()["product"]: 
-                info += "品名：" + doc.to_dict()["product"] + "<br>" 
-                info += "熱量：" + doc.to_dict()["kcal"] + "<br>"
-                info += "食物介紹：" + doc.to_dict()["hyperlink"] + "<br>"
-                info += "分類：" + doc.to_dict()["meat"] + "<br>"            
-        return info
-    else:  
-        return render_template("input.html")
-
-def searchMovie(keyword):
-    info = "您要查詢食物，關鍵字為：\n" + keyword
-    collection_ref = db.collection("麥當勞")
-    docs = collection_ref.order_by("kcal").get()
-    found = False
-    for doc in docs:
-        if keyword in doc.to_dict()["product"]:
-            found = True 
-            info += "品名：" + doc.to_dict()["product"] + "\n" 
-            info += "熱量：" + doc.to_dict()["kcal"] + "\n"
-            info += "食物介紹：" + doc.to_dict()["hyperlink"] + "\n"
-            info += "分類：" + doc.to_dict()["meat"] + "\n" 
-    if not found:
-       info += "很抱歉，目前無符合這個關鍵字的相關電影喔"                   
-    return info
-
 @app.route("/webhook", methods=["POST"])
 def webhook():
     # build a request object
@@ -71,7 +36,7 @@ def webhook():
     action =  req.get("queryResult").get("action")
     #msg =  req.get("queryResult").get("queryText")
     #info = "動作：" + action + "； 查詢內容：" + msg
-    if (action == "rateChoice"):
+    if (action == "McDetails"):
         McDonald =  req.get("queryResult").get("parameters").get("McDonald")
         if (McDonald == "牛"):
             McDonald = "牛肉"
