@@ -21,7 +21,7 @@ from linebot.models import (
 )
 
 line_bot_api = LineBotApi("UFdywBXGQuOh7Str7v4ypcoxIUnrQoD6GRcnxbtrZvCm4UFl/1rPDnIx7kHm9X8Cb2Vqz5Tgbm4iY3KFf6/GO6M4K63D22fmmnFLF0wR1A8hhHYtKvsNniLo0dpw4FHlePJvjrm9s8DFcSZbw3XWagdB04t89/1O/w1cDnyilFU=")
-handler = WebhookHandler("873f5a47-cebf-4c4f-91a9-abd4527d9fc2")
+handler = WebhookHandler("43135f8efee8efe044fbf99076a02e41")
 
 app = Flask(__name__)
 
@@ -78,11 +78,6 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    message = event.message.text
-    if(message[:5].upper() == 'MCDONALD'):
-        res = searchMcdonald(message[6:])
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text = res))
-
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text= "我是食物機器人，您輸入的是：" + event.message.text + "。祝福您有個美好的一天！" ))
