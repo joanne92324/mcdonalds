@@ -17,7 +17,7 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage, ImageSendMessage, LocationSendMessage 
+    MessageEvent, TextMessage, TextSendMessage
 )
 
 line_bot_api = LineBotApi("UFdywBXGQuOh7Str7v4ypcoxIUnrQoD6GRcnxbtrZvCm4UFl/1rPDnIx7kHm9X8Cb2Vqz5Tgbm4iY3KFf6/GO6M4K63D22fmmnFLF0wR1A8hhHYtKvsNniLo0dpw4FHlePJvjrm9s8DFcSZbw3XWagdB04t89/1O/w1cDnyilFU=")
@@ -47,7 +47,6 @@ def search():
 
         info = ""     
         collection_ref = db.collection("麥當勞")
-        #docs = collection_ref.where("title","==", "喜悅：達賴喇嘛遇見屠圖主教").get()
         docs = collection_ref.order_by("kcal").get()
         for doc in docs:
             if Mcdonaldproduct in doc.to_dict()["product"]: 
