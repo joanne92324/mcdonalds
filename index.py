@@ -38,7 +38,7 @@ def webhook():
     #info = "動作：" + action + "； 查詢內容：" + msg
     if (action == "McDetails"):
         Hamburger =  req.get("queryResult").get("parameters").get("genres")
-        info = "您選擇的食物是：" + Hamburger
+        info = "您選擇的食物是：" + genres
     return make_response(jsonify({"fulfillmentText": info}))
 
 #if __name__ == "__main__":
