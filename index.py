@@ -28,6 +28,25 @@ def read():
         Result += "文件內容：{}".format(doc.to_dict()) + "<br>"    
     return Result
 
+@app.route("/search", methods=["POST","GET"])
+def search():
+    if request.method == "POST":
+        McdonaldProduct = request.form["McdonaldProduct"]
+
+        info = ""     
+        collection_ref = db.collection("麥當勞")
+        #docs = collection_ref.where("title","==", "喜悅：達賴喇嘛遇見屠圖主教").get()
+        docs = collection_ref.order_by("kcal").get()
+        for doc in docs:
+            if McdonaldProduct in doc.to_dict()["product"]: 
+                info += "品名：" + doc.to_dict()["product"] + "<br>" 
+                info += "熱量：" + doc.to_dict()["kcal"] + "<br>"
+                info += "食物介紹：" + doc.to_dict()["hyperlink"] + "<br>"
+                info += "分類：" + doc.to_dict()["meat"] + "<br>"            
+        return info
+    else:  
+        return render_template("input.html")
+
 @app.route("/webhook", methods=["POST"])
 def webhook():
     # build a request object
