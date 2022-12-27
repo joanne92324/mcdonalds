@@ -39,11 +39,11 @@ def webhook():
         result = ""
         for doc in docs:
             dict = doc.to_dict()
-            if rate in dict["Hamburger"]:
-                result += "品名：" + dict["product"] + "\n"
-                result += "介紹：" + dict["hyperlink"] + "\n"
-                result += "熱量：" + dict["kcal"] + "\n"
-                result += "分類：" + dict["meat"] + "\n\n"
+            if rate in doc.to_dict()["Hamburger"]:
+                result += "品名：" + doc.to_dict()["product"] + "\n"
+                result += "介紹：" + doc.to_dict()["hyperlink"] + "\n"
+                result += "熱量：" + doc.to_dict()["kcal"] + "\n"
+                result += "分類：" + doc.to_dict()["meat"] + "\n\n"
        info +=result
 
     return make_response(jsonify({"fulfillmentText": info}))
