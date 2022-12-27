@@ -16,7 +16,6 @@ app = Flask(__name__)
 def index():
     homepage = "<h1>麥當勞資料讀取</h1>"
     homepage += "<br><a href=/read>麥當勞</a><br>"
-    homepage += "<br><a href=/webhook>麥當勞資料查詢</a><br>"
     return homepage
 
 @app.route("/read")
@@ -28,8 +27,8 @@ def read():
         Result += "文件內容：{}".format(doc.to_dict()) + "<br>"    
     return Result
 
-@app.route("/webhook", methods=["POST"])
-def webhook():
+@app.route("/webhook3", methods=["POST"])
+def webhook3():
     req = request.get_json(force=True)
     action =  req["queryResult"]["action"]
     #msg =  req["queryResult"]["queryText"]
@@ -37,9 +36,9 @@ def webhook():
     if(action == "McDetails"):
        Hamburger = req.get("queryResult").get("parameters").get("Hamburger")
         if(Hamburger == "嫩煎雞腿堡"):
-            Hamburger = "嫩煎雞腿堡(好吃)"
-        elif(Hamburger == "麥香雞"):
-            Hamburger = "麥香雞(好吃)"
+            Hamburger = "嫩煎雞腿堡"
+        elif(Hamburger == "漢堡"):
+            Hamburger = "麥香雞"
        info = "您選擇的食物是: " + Hamburger + "相關食物: \n"
 
        collection_ref = db.collection("麥當勞")
