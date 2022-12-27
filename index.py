@@ -36,7 +36,21 @@ def webhook():
     #info = "動作 :" + action+"; 查詢內容 :" + msg
     if(action == "McDetails"):
        Hamburger = req.get("queryResult").get("parameters").get("Hamburger")
-       info = "您選擇的食物是: " + Hamburger 
+        if(Hamburger == "嫩煎雞腿堡"):
+            Hamburger = "嫩煎雞腿堡(好吃)"
+        elif(Hamburger == "麥香雞"):
+            Hamburger = "麥香雞(好吃)"
+       info = "您選擇的食物是: " + Hamburger + "相關食物: \n"
+
+       collection_ref = db.collection("麥當勞")
+       docs = collection_ref.get()
+       result = ""
+       for doc in docs:
+        dict = doc.to_dict()
+        if Hamburger in dict["Hamburger"]:
+            result +="品名: " + dict["product"] + "\n"
+            result +="網站: " + dict["hyperlink"] + "\n"
+        info += result
     return make_response(jsonify({"fulfillmentText": info}))
 
 #if __name__ == "__main__":
