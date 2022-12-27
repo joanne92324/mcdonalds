@@ -27,8 +27,8 @@ def read():
         Result += "文件內容：{}".format(doc.to_dict()) + "<br>"    
     return Result
 
-@app.route("/webhook3", methods=["POST"])
-def webhook3():
+@app.route("/webhook", methods=["POST"])
+def webhook():
     req = request.get_json(force=True)
     action =  req["queryResult"]["action"]
     #msg =  req["queryResult"]["queryText"]
