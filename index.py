@@ -41,21 +41,6 @@ def webhook():
         elif(Hamburger == "大麥克"):
             Hamburger = "大麥克"
         info = "您選擇的食物是: " + Hamburger 
-
-        collection_ref = db.collection("麥當勞")
-        docs = collection_ref.get()
-        result = ""
-        for doc in docs:
-            dict = doc.to_dict()
-            if rate in dict["Hamburger"]:
-                result += "品名：" + dict["product"] + "\n"
-                result += "網站：" + dict["hyperlink"] + "\n\n"
-        info +=result
-
-        elif(action == "Mc"):
-            cond = req.get("queryResult").get("parameters").get("McdonaldQ")
-            keyword = req.get("queryResult").get("parameters").get("any")
-            info = "您查詢食物的" + cond + ", 關鍵字是 : " + keyword + "\n"
         if(cond == "品名"):
             collection_ref = db.collection("麥當勞")
             docs = collection_ref.get()
