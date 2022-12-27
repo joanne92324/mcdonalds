@@ -41,7 +41,7 @@ def webhook():
         cond =  req.get("queryResult").get("parameters").get("McdonaldQ")
         keyword =  req.get("queryResult").get("parameters").get("any")
         info = "您要查詢食物的" + cond + "，關鍵字是：" + keyword + "\n\n"
-    if(cond == "食物"):
+    if(cond == "品名"):
         collection_ref = db.collection("麥當勞")
         docs = collection_ref.order_by("kcal").get()
         found = False
