@@ -1,5 +1,5 @@
 import requests
-#from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup
 
 import firebase_admin
 from firebase_admin import credentials, firestore
@@ -34,16 +34,24 @@ def webhook():
     action =  req["queryResult"]["action"]
     #msg =  req["queryResult"]["queryText"]
     #info = "動作 :" + action+"; 查詢內容 :" + msg
+    if(action == "McDetails"):
+       Hamburger = req.get("queryResult").get("parameters").get("Hamburger")
+        if(Hamburger == "漢堡"):
+            Hamburger = "麥香雞"
+        elif(Hamburger == "大麥克"):
+            Hamburger = "大麥克"
+        info = "您選擇的食物是: " + Hamburger 
+
         collection_ref = db.collection("麥當勞")
         docs = collection_ref.get()
         result = ""
         for doc in docs:
             dict = doc.to_dict()
-            if rate in doc.to_dict()["Hamburger"]:
-                result += "品名：" + doc.to_dict()["product"] + "\n"
-                result += "介紹：" + doc.to_dict()["hyperlink"] + "\n"
-                result += "熱量：" + doc.to_dict()["kcal"] + "\n"
-                result += "分類：" + doc.to_dict()["meat"] + "\n\n"
+            if rate in dict["Hamburger"]:
+                result += "品名：" + dict["product"] + "\n"
+                result += "介紹：" + dict["hyperlink"] + "\n"
+                result += "熱量：" + dict["kcal"] + "\n"
+                result += "分類：" + dict["meat"] + "\n\n"
        info +=result
 
     return make_response(jsonify({"fulfillmentText": info}))
