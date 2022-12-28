@@ -34,6 +34,7 @@ def webhook():
     action =  req["queryResult"]["action"]
     #msg =  req["queryResult"]["queryText"]
     #info = "動作 :" + action+"; 查詢內容 :" + msg
+    info = ""
     if (action == "McDetails"):
         genres =  req.get("queryResult").get("parameters").get("Hamburger")
         info = "食物類型：" + Hamburger  
