@@ -49,7 +49,6 @@ def webhook():
             info += "很抱歉，目前無符合這個關鍵字的相關食物喔"
     elif (action == "Mc"): 
         cond =  req.get("queryResult").get("parameters").get("McdonaldQ")
-        keyword =  req.get("queryResult").get("parameters").get("any")
         collection_ref = db.collection("麥當勞")
         docs = collection_ref.get()
         found = False
