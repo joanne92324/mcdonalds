@@ -48,18 +48,9 @@ def webhook():
         if not found:
             info += "很抱歉，目前無符合這個關鍵字的相關食物喔"
     elif (action == "Mc"): 
-            McdonaldQ =  req.get("queryResult").get("parameters").get("McdonaldQ")
-            #info = ""
-            collection_ref = db.collection("麥當勞")
-            docs = collection_ref.get()
-            found = False
-        for doc in docs:
-            if keyword in doc.to_dict()["product"]:
-                found = True 
-                info += "品名：" + doc.to_dict()["product"] + "\n"
-                info += "熱量：" + doc.to_dict()["kcal"] + "大卡" + "\n" 
-        if not found:
-            info += "很抱歉，目前無符合這個關鍵字的相關食物喔"
+        cond =  req.get("queryResult").get("parameters").get("McdonaldQ")
+        keyword =  req.get("queryResult").get("parameters").get("any")
+        info = "您要查詢食物的" + cond + "，關鍵字是：" + keyword + "\n\n"
     return make_response(jsonify({"fulfillmentText": info}))
 
 if __name__ == "__main__":
