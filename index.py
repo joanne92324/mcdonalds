@@ -50,7 +50,6 @@ def webhook():
     elif (action == "Mc"): 
         cond =  req.get("queryResult").get("parameters").get("McdonaldQ")
         keyword =  req.get("queryResult").get("parameters").get("any")
-        if (cond == "熱量"):
         collection_ref = db.collection("麥當勞")
         docs = collection_ref.get()
         found = False
