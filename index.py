@@ -37,7 +37,7 @@ def webhook():
     info = ""
     if (action == "McDetails"):
         Hamburger =  req.get("queryResult").get("parameters").get("Hamburger")
-        info = "食物類型：" + Hamburger  
+        #info = "食物類型：" + Hamburger  
         collection_ref = db.collection("麥當勞")
         docs = collection_ref.get()
         found = False
