@@ -57,12 +57,12 @@ def webhook():
             found = False
             for doc in docs:
                 dict = doc.to_dict()
-                if keyword in dict()["product"]:
+                if keyword in dict["product"]:
                 found = True
-                info += "餐點: " + dict()["product"] + "\n"
-                info += "熱量: " + dict()["kcal"] + "\n"
-                info += "餐點資訊: " + dict()["hyperlink"] + "\n"
-                info += "分類: " + dict()["meat"] + "\n"
+                info += "餐點: " + dict["product"] + "\n"
+                info += "熱量: " + dict["kcal"] + "\n"
+                info += "餐點資訊: " + dict["hyperlink"] + "\n"
+                info += "分類: " + dict["meat"] + "\n"
         if not found:
             info += "很抱歉，目前無符合這個關鍵字的相關食物喔"
     return make_response(jsonify({"fulfillmentText": info}))
