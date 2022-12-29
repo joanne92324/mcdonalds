@@ -59,7 +59,7 @@ def webhook():
             for doc in docs:
                 if McdonaldQ in doc.to_dict()["product"]:
                     found = True
-                info += doc.to_dict()["product40
+                info += doc.to_dict()["product"]
                 info += "熱量: " + doc.to_dict()["kcal"] + "\n"
         if not found:
             info += "很抱歉，目前無符合這個關鍵字的相關食物喔"
