@@ -14,7 +14,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    homepage = "<h1>麥當勞資料讀取400</h1>"
+    homepage = "<h1>麥當勞資料讀取1</h1>"
     homepage += "<br><a href=/read>麥當勞</a><br>"
     homepage += "<br><a href=/webhook>麥當勞資料查詢</a><br>"
     return homepage
@@ -57,7 +57,7 @@ def webhook():
             docs = collection_ref.get()
             found = False
             for doc in docs:
-                if McdonaldQ in doc.to_dict()["product"]:
+                if Hamburger in doc.to_dict()["product"]:
                     found = True
                 info += doc.to_dict()["product"]
                 info += "熱量: " + doc.to_dict()["kcal"] + "\n"
