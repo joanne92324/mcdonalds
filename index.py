@@ -48,6 +48,7 @@ def webhook():
         if not found:
             info = "很抱歉，目前無符合這個關鍵字的相關食物喔"
     elif(action == "Mc"):
+        Hamburger = req.get("queryResult").get("parameters").get("Hamburger")        
         McdonaldQ = req.get("queryResult").get("parameters").get("McdonaldQ")
         if(McdonaldQ == "熱量"):
             collection_ref = db.collection("麥當勞")
