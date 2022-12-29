@@ -14,7 +14,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    homepage = "<h1>麥當勞資料讀取10</h1>"
+    homepage = "<h1>麥當勞資料讀取12</h1>"
     homepage += "<br><a href=/read>麥當勞</a><br>"
     homepage += "<br><a href=/webhook>麥當勞資料查詢</a><br>"
     return homepage
@@ -47,7 +47,13 @@ def webhook():
                 info = "您要查詢" + Hamburger + "的什麼資訊?" + "\n" 
         if not found:
             info = "很抱歉，目前無符合這個關鍵字的相關食物喔"
-    
+        collection_ref = db.collection("麥當勞")
+        docs = collection_ref.get()
+        found = False
+        for doc in docs:
+            if McdonaldQ in doc.to_dict()["kcal"]:
+                found = True
+                info = "熱量: " + McdonaldQ + "大卡" + "\n"
     return make_response(jsonify({"fulfillmentText": info}))
 
 if __name__ == "__main__":
