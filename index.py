@@ -56,7 +56,7 @@ def webhook():
             docs = collection_ref.get()
             found = False
             for doc in docs:
-                if McdonaldQ in doc.to_dict()["product"]:
+                if keyword in doc.to_dict()["product"]:
                 found = True
                 info += "餐點: " + doc.to_dict()["product"] + "\n"
                 info += "熱量: " + doc.to_dict()["kcal"] + "\n"
