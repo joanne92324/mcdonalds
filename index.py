@@ -56,12 +56,13 @@ def webhook():
             docs = collection_ref.get()
             found = False
             for doc in docs:
-                if keyword in doc.to_dict()["product"]:
+                dict = doc.to_dict()
+                if keyword in dict()["product"]:
                 found = True
-                info += "餐點: " + doc.to_dict()["product"] + "\n"
-                info += "熱量: " + doc.to_dict()["kcal"] + "\n"
-                info += "餐點資訊: " + doc.to_dict()["hyperlink"] + "\n"
-                info += "分類: " + doc.to_dict()["meat"] + "\n"
+                info += "餐點: " + dict()["product"] + "\n"
+                info += "熱量: " + dict()["kcal"] + "\n"
+                info += "餐點資訊: " + dict()["hyperlink"] + "\n"
+                info += "分類: " + dict()["meat"] + "\n"
         if not found:
             info += "很抱歉，目前無符合這個關鍵字的相關食物喔"
     return make_response(jsonify({"fulfillmentText": info}))
